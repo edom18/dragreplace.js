@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+/* -------------------------------------------
+    dragreplace
+    @author Kazuya Hiruma
+---------------------------------------------- */
+
+/////////////////////////////////////////////////////
+// import library
+/////////////////////////////////////////////////////
+@import "base";
+
+/* //////////////////////////////////////////////////
+    [Animation] 
+////////////////////////////////////////////////// */
+@-webkit-keyframes moveIn {
+    0% {
+        -webkit-transform: translate3d(0, 50px, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 50px, 0);
+    }
+}
+
+/////////////////////////////////////////////////////
+
+.replaceable {
+    &.hit {
+    
+    }
+}
+
+.replaceItemMove {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 11000;
+    -webkit-transition: all 0.3s ease-in-out
+}
+
+.dragging {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00abca), color-stop(1, #00434f));
+    @include gradient(linear-gradient(-90deg, #00abca 0%, #00434f 100%));
+}
+
+.dragTarget {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+
+    @include addPrefix(box-shadow, "0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4)");
+    @include addPrefix(transition, "-webkit-transform 0.2s ease-in-out");
+}
+
+.dragger {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 26px;
+    height: 100%;
+    background: url(../img/img_dragger.png) left center no-repeat;
+    -webkit-background-size: 27px 44px;
+    background-size: 27px 44px;
+}

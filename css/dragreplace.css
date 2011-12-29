@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* -------------------------------------------
+    dragreplace
+    @author Kazuya Hiruma
+---------------------------------------------- */
+/*
+Font-size list (base: 13px)
+ 62% =  8px
+ 70% =  9px
+ 77% = 10px
+ 85% = 11px        162% = 21px        239% = 31px
+ 93% = 12px        170% = 22px        247% = 32px
+100% = 13px        177% = 23px        254% = 33px
+108% = 14px        185% = 24px        262% = 34px
+116% = 15px        193% = 25px        270% = 35px
+124% = 16px        200% = 26px        277% = 36px
+131% = 17px        208% = 27px        285% = 37px
+139% = 18px        216% = 28px        293% = 38px
+147% = 19px        224% = 29px        300% = 39px
+154% = 20px        231% = 30px        308% = 40px
+*/
+/**
+ * clearfix
+ */
+.group {
+  *zoom: 1; }
+  .group:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0; }
+
+@-webkit-keyframes moveIn {
+  0% {
+    -webkit-transform: translate3d(0, 50px, 0); }
+
+  100% {
+    -webkit-transform: translate3d(0, 50px, 0); } }
+
+.replaceItemMove {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 11000;
+  -webkit-transition: all 0.3s ease-in-out; }
+
+.dragging {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00abca), color-stop(1, #00434f));
+  background: -webkit-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
+  background: -moz-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
+  background: -ms-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
+  background: -o-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
+  background: linear-gradient(-90deg, #00abca 0%, #00434f 100%); }
+
+.dragTarget {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  -webkit-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);
+  -ms-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);
+  -o-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  -moz-transition: -webkit-transform 0.2s ease-in-out;
+  -ms-transition: -webkit-transform 0.2s ease-in-out;
+  -o-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out; }
+
+.dragger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 26px;
+  height: 100%;
+  background: url(../img/img_dragger.png) left center no-repeat;
+  -webkit-background-size: 27px 44px;
+  background-size: 27px 44px; }

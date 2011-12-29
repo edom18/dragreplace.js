@@ -1,0 +1,126 @@
+@charset "utf-8";
+
+//////////////////////////////////////////////////////
+// defined global variables.
+
+$prefixs: -webkit-, -moz-, -ms-, -o-, '';
+
+/*
+Font-size list (base: 13px)
+ 62% =  8px
+ 70% =  9px
+ 77% = 10px
+ 85% = 11px        162% = 21px        239% = 31px
+ 93% = 12px        170% = 22px        247% = 32px
+100% = 13px        177% = 23px        254% = 33px
+108% = 14px        185% = 24px        262% = 34px
+116% = 15px        193% = 25px        270% = 35px
+124% = 16px        200% = 26px        277% = 36px
+131% = 17px        208% = 27px        285% = 37px
+139% = 18px        216% = 28px        293% = 38px
+147% = 19px        224% = 29px        300% = 39px
+154% = 20px        231% = 30px        308% = 40px
+*/
+
+$fontSizeList: 62%, 70%, 77%, 85%, 93%, 100%, 108%, 116%, 124%, 131%, 139%, 147%, 154%, 162%, 170%, 177%, 185%, 193%, 200%, 208%, 216%, 224%, 231%, 239%, 247%, 254%, 262%, 270%, 277%, 285%, 293%, 300%, 308%;
+
+@function fz($size) {
+    @if $size < 8 {
+        $size: 8;
+    }
+    @if $size > 40 {
+        $size: 40;
+    }
+    @return nth($fontSizeList, $size - 7);
+}
+
+
+// base colors.
+$baseTextColor: #000;
+$baseVisitedColor: #551a8b;
+$baseHoverColor: #00e;
+$baseActiveColor: $baseHoverColor;
+
+
+
+//////////////////////////////////////////////////////
+// defined mixins.
+
+@mixin addPrefix($prop, $val) {
+    @each $prefix in $prefixs {
+        #{$prefix}#{$prop}: #{$val};
+    }
+}
+
+@mixin addPrefix4Val($prop, $val) {
+    @each $prefix in $prefixs {
+        #{$prop}: #{$prefix}#{$val};
+    }
+}
+
+@mixin borderRadius($r: 0) {
+    @include addPrefix(border-radius, $r);
+}
+
+@mixin boxSizing($type: border-box) {
+    @include addPrefix(box-sizing, $type);
+}
+
+@mixin boxShadow($x, $y, $b, $s, $clr) {
+    @include addPrefix(box-shadow, #{$x $y $b $s $clr})
+}
+
+@mixin boxFlex {
+    @include addPrefix4Val(display, box);
+}
+
+@mixin gradient($val) {
+    @include addPrefix4Val(background, $val);
+}
+
+@mixin simpleGrad($from, $to, $dir: vertical) {
+    @if $dir == vertical {
+        @include gradientV($from, $to);
+    }
+    @else {
+        @include gradientH($from, $to);
+    }
+}
+
+@mixin gradientV($from: #000, $to: #fff) {
+    @include addPrefix4Val(background, linear-gradient(180deg, $from 0%, $to 100%));
+}
+
+@mixin gradientH($from: #000, $to: #fff) {
+    @include addPrefix4Val(background, linear-gradient(90deg, $from 0%, $to 100%));
+}
+
+@mixin minHeight($px) {
+    min-height: $px;
+    height: auto !important;
+    height: $px;
+}
+
+@mixin inlineBlock {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+
+/////////////////////////////////////////////////////////
+// base class
+
+/**
+ * clearfix
+ */
+.group {
+    *zoom: 1;
+
+    &:after {
+        content : '';
+        display : block;
+        clear : both;
+        height: 0;
+    }
+}
