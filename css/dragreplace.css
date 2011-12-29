@@ -37,20 +37,19 @@ Font-size list (base: 13px)
   100% {
     -webkit-transform: translate3d(0, 50px, 0); } }
 
+.replaceable {
+  position: relative; }
+
 .replaceItemMove {
   position: absolute;
   left: 0;
   top: 0;
   z-index: 11000;
-  -webkit-transition: all 0.3s ease-in-out; }
-
-.dragging {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #00abca), color-stop(1, #00434f));
-  background: -webkit-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
-  background: -moz-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
-  background: -ms-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
-  background: -o-linear-gradient(-90deg, #00abca 0%, #00434f 100%);
-  background: linear-gradient(-90deg, #00abca 0%, #00434f 100%); }
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
 
 .dragTarget {
   position: absolute;
@@ -72,8 +71,8 @@ Font-size list (base: 13px)
   position: absolute;
   right: 0;
   top: 0;
-  width: 26px;
+  width: 44px;
   height: 100%;
-  background: url(../img/img_dragger.png) left center no-repeat;
-  -webkit-background-size: 27px 44px;
-  background-size: 27px 44px; }
+  background: #cdedff url(../img/img_dragger.png) center center no-repeat;
+  -webkit-background-size: 22px 22px;
+  background-size: 22px 22px; }

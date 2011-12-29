@@ -3,12 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <title>dragreplace.js sample</title>
-<link rel="stylesheet" href="css/dragreplace.css" />
-<script src="js/lib/jquery-1.7.1.min.js"></script>
-<script src="js/lib/evtEmit.js"></script>
-<script src="js/dragreplace.js"></script>
+<link rel="stylesheet" href="../css/dragreplace.css" />
+<style>
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+    li {
+        margin-bottom: 10px;
+        border: solid 1px #46afeb;
+        list-style: none;
+        padding: 5px;
+        background: #40b8fc;
+    }
+
+    .replaceable.hit {
+        border-color: #ebaf46;
+        background: #fcc040;
+    }
+    .replaceable.dragging {
+        background: #78ceff;
+    }
+</style>
+<script src="../js/lib/jquery-1.7.1.min.js"></script>
+<script src="../js/lib/evtEmit.js"></script>
+<script src="../js/dragreplace.js"></script>
+<script>
+(function () {
+
+    'use strict';
+
+    $(function () {
+
+        var rp = $('.replaceableList li').replaceable();
+
+        $('.startBtn').click(function () {
+
+            $('.replaceableList2 li').replaceable();
+        });
+        $('.attachEvent').click(function () {
+
+            rp.bind('replaced', function (event, replaceElement) {
+
+                alert('Replaced!');
+                console.log('form: ', replaceElement.from, 'to: ', replaceElement.to);
+            });
+        });
+    });
+}());
+</script>
 </head>
 <body>
-    hoge
+    <ul class="replaceableList">
+        <li><img src="../img/img_txt_01.png" alt="Element01" width="171" height="24" /></li>
+        <li><img src="../img/img_txt_02.png" alt="Element02" width="175" height="24" /></li>
+        <li><img src="../img/img_txt_03.png" alt="Element03" width="174" height="24" /></li>
+        <li><img src="../img/img_txt_04.png" alt="Element04" width="175" height="25" /></li>
+        <li><img src="../img/img_txt_05.png" alt="Element05" width="174" height="24" /></li>
+    </ul>
+    <p class="attachEvent"><button>Attach "replaced" event</button></p>
+
+    <hr />
+
+    <ul class="replaceableList2">
+        <li><img src="../img/img_txt_01.png" alt="Element01" width="171" height="24" /></li>
+        <li><img src="../img/img_txt_02.png" alt="Element02" width="175" height="24" /></li>
+        <li><img src="../img/img_txt_03.png" alt="Element03" width="174" height="24" /></li>
+        <li><img src="../img/img_txt_04.png" alt="Element04" width="175" height="25" /></li>
+        <li><img src="../img/img_txt_05.png" alt="Element05" width="174" height="24" /></li>
+    </ul>
+    <p class="startBtn"><button>Start the drag replace</button></p>
 </body>
 </html>
