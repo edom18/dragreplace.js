@@ -30,7 +30,7 @@ $('.attachEvent').click(function () {
     replaceable.bind('replaced', function (event, replaceElements) {
 
         alert('Replaced!');
-        console.log('form: ', replaceElement.froms, 'to: ', replaceElements.to);
+        console.log('form: ', replaceElements.from, 'to: ', replaceElements.to);
     });
 });
 </pre>
