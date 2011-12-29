@@ -45,6 +45,11 @@ Font-size list (base: 13px)
   left: 0;
   top: 0;
   z-index: 11000;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -55,7 +60,13 @@ Font-size list (base: 13px)
   position: absolute;
   top: 0;
   left: 0;
+  opacity: 0.8;
   z-index: 10000;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);
   -ms-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4);

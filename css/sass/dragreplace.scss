@@ -37,6 +37,8 @@
     left: 0;
     top: 0;
     z-index: 11000;
+
+    @include boxSizing(border-box);
     @include addPrefix(transition, 'all 0.3s ease-in-out');
 }
 
@@ -48,8 +50,10 @@
     position: absolute;
     top: 0;
     left: 0;
+    opacity: 0.8;
     z-index: 10000;
 
+    @include boxSizing(border-box);
     @include addPrefix(box-shadow, "0 0 0 1px rgba(255, 255, 255, 0.3) inset, 5px 5px 7px rgba(0, 0, 0, 0.4)");
     @include addPrefix(transition, "-webkit-transform 0.2s ease-in-out");
 }
