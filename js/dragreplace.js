@@ -94,6 +94,12 @@ $.fn.replaceable = function (config) {
             ele1Rect = ele1.getBoundingClientRect(),
             ele2Rect = ele2.getBoundingClientRect(),
 
+            //get scroll offset
+            scroll = {
+                top: doc.body.scrollTop,
+                left: doc.body.scrollLeft
+            },
+
             d1 = $.Deferred(),
             d2 = $.Deferred();
 
@@ -102,6 +108,8 @@ $.fn.replaceable = function (config) {
 
         $(ele1Cp).addClass('replaceItemMove').css({
             'width': $(ele1).outerWidth(),
+            'left': scroll.left,
+            'top': scroll.top,
             '-webkit-transform': 'translate3d(' + ele1Rect.left + 'px, ' + ele1Rect.top + 'px, 0)'
         }).bind('webkitTransitionEnd', function (e) {
         
@@ -113,6 +121,8 @@ $.fn.replaceable = function (config) {
 
         $(ele2Cp).addClass('replaceItemMove').css({
             'width': $(ele2).outerWidth(),
+            'left': scroll.left,
+            'top': scroll.top,
             '-webkit-transform': 'translate3d(' + ele2Rect.left + 'px, ' + ele2Rect.top + 'px, 0)'
         }).bind('webkitTransitionEnd', function (e) {
         
@@ -263,7 +273,11 @@ $.fn.replaceable = function (config) {
             .bind(MouseEvent.MOUSE_DOWN, function (e) {
 
                 var evt = getEventObject(e),
-                    offset = this.getBoundingClientRect();
+                    offset = this.getBoundingClientRect(),
+                    scroll = {
+                        top: doc.body.scrollTop,
+                        left: doc.body.scrollLeft
+                    };
 
                 if (!$(e.target).hasClass('dragger')) {
                     return;
@@ -273,14 +287,16 @@ $.fn.replaceable = function (config) {
                     return;
                 }
 
+            console.log(offset.left, offset.top);
+
                 // create clone of target element.
                 self.currentClone = $(this)
                     .clone()
                     .addClass('dragTarget')
                     .css({
                         'width': $(this).outerWidth(),
-                        'left':  offset.left,
-                        'top':   offset.top,
+                        'left':  offset.left + scroll.left,
+                        'top':   offset.top + scroll.top,
                         '-webkit-transform': 'translate3d(-2px, -2px, 0)'
                     })
                     .appendTo(document.body);
