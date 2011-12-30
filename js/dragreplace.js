@@ -287,8 +287,6 @@ $.fn.replaceable = function (config) {
                     return;
                 }
 
-            console.log(offset.left, offset.top);
-
                 // create clone of target element.
                 self.currentClone = $(this)
                     .clone()
