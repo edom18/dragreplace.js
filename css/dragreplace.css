@@ -30,13 +30,6 @@ Font-size list (base: 13px)
     clear: both;
     height: 0; }
 
-@-webkit-keyframes moveIn {
-  0% {
-    -webkit-transform: translate3d(0, 50px, 0); }
-
-  100% {
-    -webkit-transform: translate3d(0, 50px, 0); } }
-
 .replaceable {
   position: relative; }
 
