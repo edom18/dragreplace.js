@@ -27,7 +27,6 @@
     }
 </style>
 <script src="../js/lib/jquery-1.7.1.min.js"></script>
-<script src="../js/lib/evtEmit.js"></script>
 <script src="../js/dragreplace.js"></script>
 <script>
 (function () {
@@ -36,7 +35,7 @@
 
     $(function () {
 
-        var rp = $('.replaceableList li').replaceable();
+        var replaceable = $('.replaceableList li').replaceable();
 
         $('.startBtn').click(function () {
 
@@ -44,7 +43,7 @@
         });
         $('.attachEvent').click(function () {
 
-            rp.bind('replaced', function (event, replaceElement) {
+            replaceable.bind('replaced', function (event, replaceElement) {
 
                 alert('Replaced!');
                 console.log('form: ', replaceElement.from, 'to: ', replaceElement.to);

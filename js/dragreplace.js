@@ -67,6 +67,15 @@ $.fn.replaceable = function (config) {
     var self = this,
         startPos = {};
 
+    //config settings.
+    this.config = config || {};
+    this.config.dragger = (this.config.dragger === undefined) ? true : false;
+
+    // set value
+    this.startPos      = startPos;
+    this.currentClone  = null;
+    this.currentTarget = null;
+
     ///////////////////////////////////////////////////////////////
     
     /**
@@ -173,11 +182,6 @@ $.fn.replaceable = function (config) {
 
     ////////////////////////////////////////////////////////////////////////
 
-    // set value
-    this.startPos      = startPos;
-    this.currentClone  = null;
-    this.currentTarget = null;
-
     // set events to `document`
     $(document)
         .bind(MouseEvent.MOUSE_MOVE, function (e) {
@@ -242,6 +246,8 @@ $.fn.replaceable = function (config) {
     // setting `Replaceable`
     return this.each(function (i, val) {
 
+        var $val = $(val);
+
          /**
           * @name hitCheck
           * @private
@@ -265,49 +271,59 @@ $.fn.replaceable = function (config) {
             }
         }
 
+        /**
+         * mouse down handler
+         * @name handleMouseDown
+         * @function
+         * @param e event object.
+         */
+        function handleMouseDown(e) {
+
+            var evt = getEventObject(e),
+                offset = this.getBoundingClientRect(),
+                scroll = {
+                    top: doc.body.scrollTop,
+                    left: doc.body.scrollLeft
+                };
+
+            if (self.config.dragger && !$(e.target).hasClass('dragger')) {
+                return;
+            }
+
+            if (self.currentClone || self.currentTarget) {
+                return;
+            }
+
+            // create clone of target element.
+            self.currentClone = $(this)
+                .clone()
+                .addClass('dragTarget')
+                .css({
+                    'width': $(this).outerWidth(),
+                    'left':  offset.left + scroll.left,
+                    'top':   offset.top + scroll.top,
+                    '-webkit-transform': 'translate3d(-2px, -2px, 0)'
+                })
+                .appendTo(document.body);
+
+            // save current target.
+            self.currentTarget = $(e.currentTarget)
+                .addClass('dragging');
+
+            self.startPos.x = evt.pageX;
+            self.startPos.y = evt.pageY;
+
+            return false;
+        }
+
         /////////////////////////////////////////////////////////
 
-        $(val)
-            .addClass('replaceable')
-            .append('<span class="dragger" />')
-            .bind(MouseEvent.MOUSE_DOWN, function (e) {
+        $val.addClass('replaceable')
+            .bind(MouseEvent.MOUSE_DOWN, handleMouseDown);
 
-                var evt = getEventObject(e),
-                    offset = this.getBoundingClientRect(),
-                    scroll = {
-                        top: doc.body.scrollTop,
-                        left: doc.body.scrollLeft
-                    };
-
-                if (!$(e.target).hasClass('dragger')) {
-                    return;
-                }
-
-                if (self.currentClone || self.currentTarget) {
-                    return;
-                }
-
-                // create clone of target element.
-                self.currentClone = $(this)
-                    .clone()
-                    .addClass('dragTarget')
-                    .css({
-                        'width': $(this).outerWidth(),
-                        'left':  offset.left + scroll.left,
-                        'top':   offset.top + scroll.top,
-                        '-webkit-transform': 'translate3d(-2px, -2px, 0)'
-                    })
-                    .appendTo(document.body);
-
-                // save current target.
-                self.currentTarget = $(e.currentTarget)
-                    .addClass('dragging');
-
-                self.startPos.x = evt.pageX;
-                self.startPos.y = evt.pageY;
-
-                return false;
-            });
+        if (self.config.dragger) {
+            $val.append('<span class="dragger" />');
+        }
 
         //bind event to global of replaceable
         self.bind('move', hitCheck);
